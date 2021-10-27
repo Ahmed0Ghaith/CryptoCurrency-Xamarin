@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:VM="clr-namespace:CryptoCurrencyXamarin.ViewModel"
+             x:Class="CryptoCurrencyXamarin.Views.favorite">
+    <ContentPage.BindingContext>
+        <VM:FavoriteVM/>
+    </ContentPage.BindingContext>
+    <StackLayout BackgroundColor="Black">
+
+        <StackLayout>
+
+            <CollectionView      ItemsSource="{Binding FavoriteCryptolist}" x:Name="Cryptolist"        
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            ItemSizingStrategy="MeasureFirstItem"     
+                      
+                        
+            >
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="15"
+                        Span="1"  />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <StackLayout  HorizontalOptions="StartAndExpand"  VerticalOptions="CenterAndExpand" Margin="10,0">
+                            <StackLayout.GestureRecognizers>
+                                <!-- <TapGestureRecognizer x:Name="SelectedItem" Command="{Binding Source={RelativeSource AncestorType={x:Type VM:HomePageVM}}, Path=Zekr}"		 CommandParameter="{Binding .}"
+                            />-->
+                            </StackLayout.GestureRecognizers>
+                            <pancakeview:PancakeView
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                                           BackgroundColor="#fff"
+                       CornerRadius="5" >
+
+                                <pancakeview:PancakeView.Shadow
+                                                >
+                                    <pancakeview:DropShadow Color="#fff" Offset="0,2" />
+                                </pancakeview:PancakeView.Shadow>
+
+
+
+                                <Grid  Margin="20" RowDefinitions="auto"   HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                                    <StackLayout Margin="10" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                        <Frame  Padding="1" CornerRadius="3">
+                                            <Label Text="{Binding  symbol }" HorizontalOptions="CenterAndExpand" TextType="Text" FontAttributes="Bold" TextColor="#FFB102" VerticalOptions="Center"  FontSize="20" />
+                                        </Frame>
+                                        <Label Text="{Binding  name }" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+
+                                    </StackLayout>
+                                    <StackLayout  Grid.Row="1" Grid.Column="0" >
+                                        <Label Text="{Binding  cmc_rank,StringFormat=' CMC Rank : {0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding  quote.USD.price,StringFormat=' Price : ${0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding  last_updated,StringFormat=' Last Update : {0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding  quote.USD.volume_change_24h,StringFormat=' Volume Change 24h : ${0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding  quote.USD.percent_change_1h,StringFormat=' Percent Change 1h :   ${0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding   quote.USD.percent_change_24h,StringFormat=' Percent Change 24h : ${0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding   quote.USD.percent_change_7d,StringFormat=' Percent Change 7d :   ${0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding   quote.USD.percent_change_30d,StringFormat=' Percent Change 30d : ${0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding   quote.USD.percent_change_60d,StringFormat=' Percent Change 60d : ${0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding   quote.USD.percent_change_90d,StringFormat=' Percent Change 90d : ${0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding   quote.USD.market_cap,StringFormat=' Market Cap : ${0}'}" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+
+                                    </StackLayout>
+
+                                </Grid>
+                            </pancakeview:PancakeView>
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

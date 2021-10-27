@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CryptoCurrencyXamarin.Views.MainPage"
+               Shell.NavBarIsVisible="False"
+
+             xmlns:pages="clr-namespace:CryptoCurrencyXamarin.Views">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="NavigationPrimary">White</Color>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="#FFB102" />
+                <Setter Property="Shell.ForegroundColor" Value="#FFB102" />
+                <Setter Property="Shell.TitleColor" Value="#FFB102" />
+                <Setter Property="Shell.DisabledColor" Value="#FFB102" />
+
+                <Setter Property="Shell.UnselectedColor" Value="#FFB102" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="#000" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="#000" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#f1f1f1" />
+                <Setter Property="Shell.TabBarTitleColor" Value="#FFB102" />
+
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+    <TabBar    >
+        <Tab 
+            Title="Home"
+            Icon="ic_action_home.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:Home}" />
+        </Tab>
+        <Tab 
+            Title="Favorite"                                
+            Icon="ic_action_favorite_border.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:favorite}" />
+        </Tab>
+        <Tab 
+            Title="News"                                
+            
+            Icon="ic_action_article.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:News}" />
+        </Tab>
+    </TabBar>
+</Shell>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:VM="clr-namespace:CryptoCurrencyXamarin.ViewModel"
+             x:Class="CryptoCurrencyXamarin.Views.News">
+    <ContentPage.BindingContext>
+        <VM:NewsVM/>
+    </ContentPage.BindingContext>
+    <StackLayout BackgroundColor="Black">
+
+        <StackLayout>
+
+            <CollectionView      ItemsSource="{Binding NewsList}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            ItemSizingStrategy="MeasureFirstItem"     
+                      
+                        
+            >
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="15"
+                        Span="1"  />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <pancakeview:PancakeView
+                                Padding="0"
+                              HeightRequest="200"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand"         
+                                Margin="60,0"
+                                CornerRadius="10">
+
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="SelectedItem" Command="{Binding Source={RelativeSource AncestorType={x:Type VM:NewsVM}}, Path=ArticleTabbed}"		 CommandParameter="{Binding .}"
+                            />
+                                </Grid.GestureRecognizers>
+                                <Image
+                                  
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="0"                                     
+                                        Aspect="AspectFill"                                        
+                                        Source="{Binding urlToImage, Mode=OneWay}">
+
+                                </Image>
+
+
+                                <pancakeview:PancakeView
+                                Opacity="0.7"
+                                        HorizontalOptions="Fill"
+                                        VerticalOptions="End"
+                                        HeightRequest="50">
+
+                                    <pancakeview:PancakeView.BackgroundGradientStops>
+                                        <pancakeview:GradientStopCollection>
+                                            <pancakeview:GradientStop Color="#fff" Offset="1" />
+                                            <pancakeview:GradientStop Color="#fff" Offset="0" />
+                                        </pancakeview:GradientStopCollection>
+                                    </pancakeview:PancakeView.BackgroundGradientStops>
+                                </pancakeview:PancakeView>
+
+
+                                <Label
+                                        Text="{Binding title }"
+                                      FontSize="18"
+                                        TextColor="Black"
+                                        VerticalOptions="End"
+                                        HorizontalOptions="Fill"
+                                        Margin="8,0,8,4"
+                                        MaxLines="2"
+                                        LineBreakMode="TailTruncation"
+                                        LineHeight="0.8"/>
+
+                                <pancakeview:PancakeView
+                                        Padding="10,0"
+                                        HeightRequest="22"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="#FFB102"
+                                        Margin="8,8,8,0"
+                                        CornerRadius="4">
+
+                                    <Label
+                                            Text="{Binding publishedAt }"
+                                           FontSize="15"
+                                            TextColor="White"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            VerticalTextAlignment="Center"/>
+
+                                </pancakeview:PancakeView>
+
+
+
+
+
+
+
+                            </Grid>
+
+                        </pancakeview:PancakeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

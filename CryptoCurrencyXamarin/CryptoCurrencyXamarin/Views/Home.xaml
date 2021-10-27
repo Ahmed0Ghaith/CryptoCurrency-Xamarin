@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:VM="clr-namespace:CryptoCurrencyXamarin.ViewModel"
+             x:Class="CryptoCurrencyXamarin.Views.Home">
+    <ContentPage.BindingContext>
+        <VM:MainPageVM/>
+    </ContentPage.BindingContext>
+    <StackLayout BackgroundColor="Black">
+        <StackLayout Padding="10" HeightRequest="40" HorizontalOptions="FillAndExpand" >
+            <Entry Placeholder="Search" PlaceholderColor="Gray"  TextColor="White" Text="{Binding Search,Mode=TwoWay}"/>
+        </StackLayout>
+        <StackLayout>
+            <RefreshView  IsRefreshing="{Binding IsBusy}" Command="{Binding refresh}" >
+                <CollectionView      ItemsSource="{Binding Cryptolist}" x:Name="Cryptolist"        
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            ItemSizingStrategy="MeasureFirstItem"     
+                      
+                        
+            >
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="15"
+                        Span="1"  />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate >
+                        <DataTemplate>
+                            <StackLayout HeightRequest="80" HorizontalOptions="StartAndExpand"  VerticalOptions="CenterAndExpand" Margin="10,0">
+
+
+
+                                <pancakeview:PancakeView
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                                           BackgroundColor="#fff"
+                       CornerRadius="5" >
+
+                                    <pancakeview:PancakeView.Shadow
+                                                >
+                                        <pancakeview:DropShadow Color="#fff" Offset="0,2" />
+                                    </pancakeview:PancakeView.Shadow>
+
+
+
+                                    <Grid  Margin="10" RowDefinitions="55"  ColumnDefinitions="70,*,*,30" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                                        <StackLayout VerticalOptions="CenterAndExpand">
+                                            <Frame  Padding="1" CornerRadius="3">
+                                                <Label Text="{Binding  symbol }" HorizontalOptions="CenterAndExpand" TextType="Text" FontAttributes="Bold" TextColor="#FFB102" VerticalOptions="Center"  FontSize="20" />
+                                            </Frame>
+                                        </StackLayout>
+                                        <Label Text="{Binding  name }" Margin="10,0" Grid.Column="1"  TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <Label Text="{Binding  quote.USD.price, StringFormat='${0:#,0.#0}'}" Margin="10,0" Grid.Column="2"  TextColor="#5c5c5c" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+                                        <ImageButton Source="ic_action_star_border.png"  Grid.Column="3" Command="{Binding Source={RelativeSource AncestorType={x:Type VM:MainPageVM}}, Path=AddFav}"		 CommandParameter="{Binding .}" BackgroundColor="Transparent" HeightRequest="10" WidthRequest="10" />
+                                        <ImageButton IsVisible="{Binding Fav}" Source="ic_action_star.png" Command="{Binding Source={RelativeSource AncestorType={x:Type VM:MainPageVM}}, Path=AddFav}"	 CommandParameter="{Binding .}"  Grid.Column="3" BackgroundColor="Transparent" HeightRequest="10" WidthRequest="10" />
+
+
+                                    </Grid>
+                                </pancakeview:PancakeView>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
