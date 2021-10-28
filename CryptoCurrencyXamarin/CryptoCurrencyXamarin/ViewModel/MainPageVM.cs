@@ -1,17 +1,17 @@
 ﻿using CryptoCurrencyXamarin.Helpers;
 using CryptoCurrencyXamarin.Models;
+using CryptoCurrencyXamarin.Views;
 using SQLite;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace CryptoCurrencyXamarin.ViewModel
 {
     class MainPageVM : BaseViewModel
     {
+
 
         public ObservableCollection<CCInformationModel.Datum> Cryptolist { get; set; }
         public ObservableCollection<CCInformationModel.Datum> FavoriteCryptolist { get; set; }
@@ -20,8 +20,11 @@ namespace CryptoCurrencyXamarin.ViewModel
 
 
         public Command refresh { get; set; }
+        public Command NavToProfiel { get; set; }
+
         public Command<CCInformationModel.Datum> AddFav { get; set; }
 
+        public Command<CCInformationModel.Datum> Add { get; set; }
 
 
         private string _search;
@@ -45,11 +48,35 @@ namespace CryptoCurrencyXamarin.ViewModel
             AddFav = new Command<CCInformationModel.Datum>(AddFavorite);
             Cryptolist = new ObservableCollection<CCInformationModel.Datum>();
             FavoriteCryptolist = new ObservableCollection<CCInformationModel.Datum>();
+            NavToProfiel = new Command(NavProfile);
+            Add = new Command<CCInformationModel.Datum>(AddCurrency);
             CryptoStorelist = new List<CCInformationModel.Datum>();
             Con = new SQLiteConnection(App.DataBaseLocation);
+            Con.CreateTable<Profile>();
             GetCurrency();
+            GeFund();
 
 
+        }
+
+        private void AddCurrency(CCInformationModel.Datum obj)
+        {
+            Profile NewCurrency = new Profile
+            {
+
+                name = obj.name,
+                price = obj.quote.USD.price,
+                symbol = obj.symbol
+            };
+            increase(NewCurrency);
+
+        }
+
+
+
+        private void NavProfile(object obj)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new ProfilePage());
         }
 
         private void AddFavorite(CCInformationModel.Datum obj)

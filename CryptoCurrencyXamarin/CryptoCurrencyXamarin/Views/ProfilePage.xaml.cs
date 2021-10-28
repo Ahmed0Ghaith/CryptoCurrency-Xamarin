@@ -11,19 +11,19 @@ using Xamarin.Forms.Xaml;
 namespace CryptoCurrencyXamarin.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Home : ContentPage
+    public partial class ProfilePage : ContentPage
     {
-        MainPageVM VM;
-        public Home()
+        ProfileVM VM;
+        public ProfilePage()
         {
             InitializeComponent();
-            BindingContext = VM = new MainPageVM();
-
+            BindingContext = VM = new ProfileVM();
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            VM.GeFund();
+            VM.GetownCurrency();
         }
+
     }
 }

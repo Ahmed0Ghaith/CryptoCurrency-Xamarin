@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:VM="clr-namespace:CryptoCurrencyXamarin.ViewModel" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="CryptoCurrencyXamarin.Views.ProfilePage">
+    <ContentPage.BindingContext>
+        <VM:ProfileVM/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Margin="20" BackgroundColor="#fff">
+            <StackLayout>
+                <Frame HorizontalOptions="Center" Padding="10" CornerRadius="50" >
+                    <Image Source="ic_action_person.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="50" />
+                </Frame>
+                <Label Text="Bill" TextColor="Black" HorizontalOptions="Center" FontSize="18"/>
+                <Label Text="example@gmail.com" HorizontalOptions="Center" TextColor="Gray" FontSize="14"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Margin="0,20,0,0" >
+                <Image HeightRequest="40" HorizontalOptions="Start" Source="cryptocurrencylogo" />
+                <Label Text="{Binding Fund, StringFormat='${0:#,0.#0}'}"  VerticalOptions="Center" HorizontalOptions="Center" FontSize="18"/>
+
+            </StackLayout>
+            <StackLayout Margin="5,20,0,0">
+                <Label Text="Currency Wallet :" TextColor="Black"  VerticalOptions="Center" FontAttributes="Bold" HorizontalOptions="Start" FontSize="18"/>
+
+                <StackLayout >
+
+                    <StackLayout>
+
+                        <CollectionView      ItemsSource="{Binding OwnCryptolist }" x:Name="Cryptolist"        
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            ItemSizingStrategy="MeasureFirstItem"     
+                      
+                        
+            >
+
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="15"
+                        Span="1"  />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate >
+                                <DataTemplate>
+                                    <StackLayout  HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand" >
+                                        <StackLayout.GestureRecognizers>
+                                            <!-- <TapGestureRecognizer x:Name="SelectedItem" Command="{Binding Source={RelativeSource AncestorType={x:Type VM:HomePageVM}}, Path=Zekr}"		 CommandParameter="{Binding .}"
+                            />-->
+                                        </StackLayout.GestureRecognizers>
+
+
+
+                                        <Frame Margin="10" CornerRadius="7">
+
+
+                                            <Grid  Margin="20" RowDefinitions="auto"   HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                                                <StackLayout Margin="10" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                    <Frame  Padding="1" CornerRadius="3">
+                                                        <Label Text="{Binding  symbol }" HorizontalOptions="CenterAndExpand" TextType="Text" FontAttributes="Bold" TextColor="#FFB102" VerticalOptions="Center"  FontSize="20" />
+                                                    </Frame>
+                                                    <Label Text="{Binding  name }" Margin="10,0"   TextColor="Black" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
+
+                                                </StackLayout>
+                                                <StackLayout HorizontalOptions="StartAndExpand"  Grid.Row="1" Grid.Column="0" >
+                                                    <Label Text="{Binding  price,StringFormat=' Purchase Price : {0}'}"   TextColor="Black" HorizontalTextAlignment="Start"  FontSize="18" FontFamily="GaliModernFont"/>
+
+                                                    <Grid ColumnDefinitions="*,*">
+                                                        <StackLayout  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" >
+                                                            <Button   Command="{Binding Source={RelativeSource AncestorType={x:Type VM:ProfileVM}}, Path=Add}"	Text="Buy"  TextColor="White" CommandParameter="{Binding .}"  BackgroundColor="#FFB102" CornerRadius="7"  />
+                                                        </StackLayout>
+                                                        <StackLayout  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="1" >
+                                                            <Button  Command="{Binding Source={RelativeSource AncestorType={x:Type VM:ProfileVM}}, Path=decrease}"	Text="Sell"	 	 TextColor="White" CommandParameter="{Binding .}"  BackgroundColor="#FFB102" CornerRadius="7"   />
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+
+                                            </Grid>
+
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
+
+                    </StackLayout>
+                </StackLayout>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

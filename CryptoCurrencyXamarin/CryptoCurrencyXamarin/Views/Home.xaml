@@ -3,17 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:VM="clr-namespace:CryptoCurrencyXamarin.ViewModel"
+              BackgroundColor="Black"
              x:Class="CryptoCurrencyXamarin.Views.Home">
     <ContentPage.BindingContext>
         <VM:MainPageVM/>
     </ContentPage.BindingContext>
-    <StackLayout BackgroundColor="Black">
+    <StackLayout  Margin="5"  BackgroundColor="Black">
         <StackLayout Padding="10" HeightRequest="40" HorizontalOptions="FillAndExpand" >
             <Entry Placeholder="Search" PlaceholderColor="Gray"  TextColor="White" Text="{Binding Search,Mode=TwoWay}"/>
         </StackLayout>
+        <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+            <StackLayout.GestureRecognizers >
+                <TapGestureRecognizer Command="{Binding NavToProfiel}"/>
+            </StackLayout.GestureRecognizers>
+
+            <Frame  CornerRadius="7" Padding="5">
+                <Image  Source="ic_action_person.png" BackgroundColor="White" WidthRequest="40" HeightRequest="40"  VerticalOptions="CenterAndExpand" />
+            </Frame>
+
+            <StackLayout >
+                <Label Text="Bill" TextColor="White" HorizontalOptions="Start" FontSize="18"/>
+
+                <StackLayout Orientation="Horizontal"  >
+                    <Frame  CornerRadius="50" Padding="1">
+                        <Image HeightRequest="20" HorizontalOptions="Start" Source="cryptocurrencylogo" />
+                    </Frame>
+                    <Label Text="{Binding Fund, StringFormat='${0:#,0.#0}'}" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontSize="18"/>
+
+                </StackLayout>
+
+            </StackLayout>
+
+        </StackLayout>
         <StackLayout>
             <RefreshView  IsRefreshing="{Binding IsBusy}" Command="{Binding refresh}" >
-                <CollectionView      ItemsSource="{Binding Cryptolist}" x:Name="Cryptolist"        
+                <CollectionView    ItemsSource="{Binding Cryptolist}" x:Name="Cryptolist"        
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             ItemSizingStrategy="MeasureFirstItem"     
@@ -28,7 +52,7 @@
 
                     <CollectionView.ItemTemplate >
                         <DataTemplate>
-                            <StackLayout HeightRequest="80" HorizontalOptions="StartAndExpand"  VerticalOptions="CenterAndExpand" Margin="10,0">
+                            <StackLayout HorizontalOptions="StartAndExpand"  VerticalOptions="CenterAndExpand" Margin="10,0">
 
 
 
@@ -45,7 +69,7 @@
 
 
 
-                                    <Grid  Margin="10" RowDefinitions="55"  ColumnDefinitions="70,*,*,30" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                                    <Grid  Margin="10" RowDefinitions="60,40"   ColumnDefinitions="70,*,*,30" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                                         <StackLayout VerticalOptions="CenterAndExpand">
                                             <Frame  Padding="1" CornerRadius="3">
                                                 <Label Text="{Binding  symbol }" HorizontalOptions="CenterAndExpand" TextType="Text" FontAttributes="Bold" TextColor="#FFB102" VerticalOptions="Center"  FontSize="20" />
@@ -55,6 +79,7 @@
                                         <Label Text="{Binding  quote.USD.price, StringFormat='${0:#,0.#0}'}" Margin="10,0" Grid.Column="2"  TextColor="#5c5c5c" VerticalOptions="Center"  FontSize="18" FontFamily="GaliModernFont"/>
                                         <ImageButton Source="ic_action_star_border.png"  Grid.Column="3" Command="{Binding Source={RelativeSource AncestorType={x:Type VM:MainPageVM}}, Path=AddFav}"		 CommandParameter="{Binding .}" BackgroundColor="Transparent" HeightRequest="10" WidthRequest="10" />
                                         <ImageButton IsVisible="{Binding Fav}" Source="ic_action_star.png" Command="{Binding Source={RelativeSource AncestorType={x:Type VM:MainPageVM}}, Path=AddFav}"	 CommandParameter="{Binding .}"  Grid.Column="3" BackgroundColor="Transparent" HeightRequest="10" WidthRequest="10" />
+                                        <Button   Grid.Column="0" Command="{Binding Source={RelativeSource AncestorType={x:Type VM:MainPageVM}}, Path=Add}"	Text="Buy"	 TextColor="White" CommandParameter="{Binding .}"  BackgroundColor="#FFB102" CornerRadius="7"  Grid.Row="1" />
 
 
                                     </Grid>
